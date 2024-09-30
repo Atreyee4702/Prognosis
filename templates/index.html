@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Patient Assessment Form</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            background: url("{{ url_for('static', filename='Slide1.jpg') }}") no-repeat center center fixed;
+        background-size: cover;
+            background-size: cover;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            /* Transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            /* Adjust the width to fit the form */
+            /* Set a maximum width for better responsiveness */
+            margin-left: 50px;
+            /* Left margin for positioning */
+            display: none;
+            /* Hide all sections initially */
+            margin-top: 5%;
+            /* Adjust this value to control top spacing */
+            font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+            
+        }
+
+        .form-container.active {
+            display: block;
+            width: 600px;
+            /* Show the active section */
+        }
+
+        .form-container h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        label {
+            width: 30%;
+            /* One third width for labels */
+            text-align: left;
+            font-size: 13px;
+        }
+
+        select
+         {
+            width: 32%;
+            /* Adjusted width */
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            /* Space between label and input */
+        }
+        input[type="number"],
+        input[type="text"],
+        input[type="float"] {
+            width: 28%;
+            /* Adjusted width */
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 5px;
+            /* Space between label and input */
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        input[type="submit"],
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            width:150px;
+            font-size:18px
+        }
+
+        input[type="submit"]:hover,
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="POST" id="form">
+        <!-- Section 1 -->
+        <div class="form-container active" id="section1">
+            <h2>Patient Assessment - Step 1</h2>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <label for="asthma">Asthma:</label>
+                <label for="iron_deficiency">Iron Deficiency:</label>
+            </div>
+            <div class="form-group">
+                <select id="gender" name="gender">
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                </select>
+                <select id="asthma" name="asthma">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <select id="iron_deficiency" name="iron_deficiency">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pneumonia">Pneumonia:</label>
+                <label for="substance_dependence">Substance Dependence:</label>
+                <label for="psych_disorder">Psychological Disorder:</label>
+            </div>
+            <div class="form-group">
+                <select id="pneumonia" name="pneumonia">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <select id="substance_dependence" name="substance_dependence">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <select id="psych_disorder" name="psych_disorder">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="depression">Depression:</label>
+                <label for="other_psychological">Other Psychological Issues:</label>
+                <label for="fibrosis">Has Fibrosis:</label>
+            </div>
+            <div class="form-group">
+                <select id="depression" name="depression">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <select id="other_psychological" name="other_psychological">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <select id="fibrosis" name="fibrosis">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="button-container">
+                <button type="button" onclick="nextSection('section1', 'section2')">Next</button>
+            </div>
+        </div>
+
+        
+
+        <!-- Section 2 -->
+        <div class="form-container" id="section2">
+            <h2>Patient Assessment - Step 2</h2>
+            <div class="form-group">
+                <label for="malnutrition">Malnutrition:</label>
+                <label for="hemo">Hemoglobin Issues:</label>
+                <label for="dialysisrenalendstage">End stage renal dialysis:</label>
+
+            </div>
+            <div class="form-group">
+                <select id="malnutrition" name="malnutrition">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <select id="hemoglobin" name="hemo">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                <select id="dialysis" name="dialysisrenalendstage">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="facid">FACID:</label>
+                <label for="readmissions">Number of Readmissions:</label>
+                <label for="second_diagnosis">Second Diagnosis (ICD-9):</label>
+            </div>
+            <div class="form-group">
+                <select id="facid" name="facid">
+                    <option value='0'>A</option>
+                    <option value="1">B</option>
+                    <option value="2">C</option>
+                    <option value="3">D</option>
+                    <option value="4">E</option>
+                </select>
+                <input type="number" id="readmissions" name="readmissions" min="0" required>
+
+                <select id="second_diagnosis" name="second_diagnosis">
+                    <option value="0">Diagnosis 1</option>
+                    <option value="1">Diagnosis 2</option>
+                    <option value="2">Diagnosis 3</option>
+                    <option value="3">Diagnosis 4</option>
+                    <option value="4">Diagnosis 5</option>
+                    <option value="5">Diagnosis 6</option>
+                    <option value="6">Diagnosis 7</option>
+                    <option value="7">Diagnosis 8</option>
+                    <option value="8">Diagnosis 9</option>
+                    <option value="9">Diagnosis 10</option>
+                    
+                </select>
+                
+            </div>
+            <div class="form-group">
+                <label for="neutrophils">Neutrophils:</label>
+                <label for="sodium">Sodium Level:</label>
+                <label for="glucose">Glucose Level:</label>
+            </div>
+            <div class="form-group">
+                <input type="float" id="neutrophils" name="neutrophils" required>
+                <input type="float" id="sodium" name="sodium" required>
+                <input type="float" id="glucose" name="glucose" required>
+            </div>
+
+
+            <div class="button-container">
+                <button type="button" onclick="nextSection('section2', 'section1')">Back</button>
+                <button type="button" onclick="nextSection('section2', 'section3')">Next</button>
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="form-container" id="section3">
+            <h2>Patient Assessment - Step 3</h2>
+            <div class="form-group">
+                <label for="blood_urea_nitrogen">Blood Urea Nitrogen Level:</label>
+                <label for="creatinine">Creatinine Level:</label>
+                <label for="bmi">BMI:</label>
+            </div>
+            <div class="form-group">
+                <input type="float" id="blood_urea_nitrogen" name="blood_urea_nitrogen" required>
+                <input type="float" id="creatinine" name="creatinine" required>
+                <input type="float" id="bmi" name="bmi" required>
+            </div>
+            <div class="form-group">
+                <label for="pulse">Pulse:</label>
+                <label for="respiration">Respiration:</label>
+                <label for="hematocrit">Hematocrit:</label>
+            </div>
+            <div class="form-group">
+                <input type="float" id="pulse" name="pulse" required>
+                <input type="float" id="respiration" name="respiration" required>
+                <input type="float" id="hematocrit" name="hematocrit" required>
+
+            </div>
+            <div class="button-container">
+                <button type="button" onclick="nextSection('section3', 'section2')">Back</button>
+                <input type="submit" value="Submit">
+            </div>
+        </div>
+    </form>
+
+    <script>
+        function nextSection(currentSectionId, nextSectionId) {
+            document.getElementById(currentSectionId).classList.remove('active');
+            document.getElementById(nextSectionId).classList.add('active');
+        }
+        document.getElementById('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const jsonObject = {};
+            formData.forEach(function (value, key) {
+                jsonObject[key] = value;
+            });
+            console.log(jsonObject)
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(jsonObject),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+
+
+
+
+        
+    </script>
+</body>
+
+
+</html>
